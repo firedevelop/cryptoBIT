@@ -284,8 +284,8 @@ body {
 }
 
 .crypto-logo {
-  width: 3rem;
-  height: 3rem;
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -298,12 +298,12 @@ body {
 
 .crypto-symbol {
   font-weight: 700;
-  font-size: 1.4rem;
+  font-size: 2rem;
   color: var(--black);
 }
 
 .crypto-name {
-  font-size: 1.2rem;
+  font-size: 2rem;
   color: var(--gray-medium);
   line-height: 1.2;
 }
@@ -363,7 +363,7 @@ body {
   justify-content: center;
   gap: 1rem;
   padding: 1.5rem;
-  background: linear-gradient(135deg, var(--primary) 0%, #4fd4a7 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--orange-light) 100%);
   border-radius: 1rem;
   color: var(--black);
   font-weight: 600;
@@ -429,13 +429,13 @@ body {
 
 .result img {
   width: 100%;
-  max-width: 10rem;
+  max-width: 20rem;
   border-radius: 50%;
 }
 
 .result p {
   margin: 0 0 1rem;
-  font-size: 1.6rem;
+  font-size: 2.6rem;
   color: var(--black);
 }
 

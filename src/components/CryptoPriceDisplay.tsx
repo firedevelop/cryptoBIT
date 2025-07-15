@@ -1,12 +1,30 @@
 import { useMemo } from "react"
 import { useCryptoStore } from "../store"
+import { currencies } from "../data"
 import Spinner from "./Spinner"
+
+// Mapeo de símbolos de moneda
+const currencySymbols: Record<string, string> = {
+    'USD': '$',
+    'EUR': '€',
+    'GBP': '£',
+    'MXN': '$'
+}
 
 export default function CryptoPriceDisplay() {
 
     const result = useCryptoStore((state) => state.result)
     const loading = useCryptoStore((state) => state.loading)
+    const currentPair = useCryptoStore((state) => state.currentPair)
+    const cryptocurrencies = useCryptoStore((state) => state.cryptocurrencies)
     const hasResult = useMemo(() => !Object.values(result).includes('') , [result])
+    
+    // Obtener información de la moneda seleccionada
+    const selectedCurrency = currencies.find(currency => currency.code === currentPair.currency)
+    const currencySymbol = currencySymbols[currentPair.currency] || currentPair.currency
+    
+    // Obtener información de la criptomoneda seleccionada
+    const selectedCrypto = cryptocurrencies.find(crypto => crypto.CoinInfo.Name === currentPair.criptocurrency)
     
     return (
         <div className="result-wrapper">
@@ -14,7 +32,17 @@ export default function CryptoPriceDisplay() {
                 <Spinner />
             ) : hasResult ? (
                 <>
-                    <h2>Cotización</h2>
+                    <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
+                        <h1 style={{ fontSize: '2.8rem', margin: '0.5rem 0', color: 'var(--black)' }}>
+                            {currentPair.criptocurrency}
+                        </h1>
+                        <h2 style={{ fontSize: '2.2rem', margin: '0.5rem 0', color: 'var(--gray-medium)', fontWeight: '600' }}>
+                            {selectedCrypto?.CoinInfo.FullName || 'Criptomoneda'}
+                        </h2>
+                        <h3 style={{ fontSize: '1.8rem', margin: '0.5rem 0', color: 'var(--primary)', fontWeight: '500' }}>
+                            {currencySymbol} {selectedCurrency?.name || 'Moneda'}
+                        </h3>
+                    </div>
                     <div className="result">
                         <img
                             src={`https://cryptocompare.com/${result.IMAGEURL}`}
@@ -42,7 +70,7 @@ export default function CryptoPriceDisplay() {
                                 (e.target as HTMLImageElement).style.display = 'none';
                             }}
                         />
-                        <h2>Cotizador de Criptomonedas</h2>
+                        <h2>Crypto Monitor</h2>
                         <p>Selecciona una moneda y una criptomoneda para ver la cotización en tiempo real</p>
                         <div className="default-selection">
                             <span>🇺🇸 USD</span>
