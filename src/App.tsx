@@ -13,9 +13,16 @@ function App() {
   return (
     <>
       <div className="app-container">
-          <h1 className="app-title">
-              Cotizador de <span>Criptomonedas</span>
-          </h1>
+          <div className="app-header">
+              <img 
+                  src="/images/logo.svg" 
+                  alt="Bitcoin Logo" 
+                  className="app-logo"
+              />
+              <h1 className="app-title">
+                  crypto <span>BIT</span>
+              </h1>
+          </div>
 
           <div className="main-layout">
               <CriptoSearchForm />
