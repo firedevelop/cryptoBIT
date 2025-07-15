@@ -34,8 +34,8 @@ A modern and responsive web application for real-time cryptocurrency price track
 <img src="public/images/screen-002.png" alt="Screenshot 3" width="300"/>
 <img src="public/images/screen-003.png" alt="Screenshot 4" width="300"/>
 <img src="public/images/screen-005.png" alt="Screenshot 5" width="300"/>
-<img src="public/images/screen-006.png" alt="Screenshot 6" width="300"/></p>
-
+<img src="public/images/screen-006.png" alt="Screenshot 6" width="300"/>
+<img src="public/images/screen-012.png" alt="Screenshot 6" width="300"/></p>
 
 ## 🛠️ Tech Stack
 
