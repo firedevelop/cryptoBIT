@@ -25,23 +25,24 @@ A modern and responsive web application for real-time cryptocurrency price track
 - 🎯 **Default Selection** - USD/BTC preselected for better UX
 - 🌙 **Visual Effects** - Smooth animations and fluid transitions
 
-## 🚀 Live Demo
-
-[View Demo](https://your-domain.com) <!-- Add your deployment URL here -->
-
 ## 📸 Screenshots
+---
+<p align="center">
+  <img src="public/images/mockup.svg" alt="crypto BIT Screenshot 1" width="700"/>
+  <img src="public/images/screen-001.png" alt="crypto BIT  Screenshot 1" width="700"/>
+<img src="public/images/screen-000.png" alt="Screenshot 2" width="300"/>
+<img src="public/images/screen-002.png" alt="Screenshot 3" width="300"/>
+<img src="public/images/screen-003.png" alt="Screenshot 4" width="300"/>
+<img src="public/images/screen-005.png" alt="Screenshot 5" width="300"/>
+<img src="public/images/screen-006.png" alt="Screenshot 6" width="300"/></p>
 
-### Desktop
-![Desktop View](./screenshots/desktop.png)
-
-### Mobile
-![Mobile View](./screenshots/mobile.png)
 
 ## 🛠️ Tech Stack
 
 ### Frontend
 - **React 18** - JavaScript library for building user interfaces
 - **TypeScript** - Static typing for JavaScript
+- **React Router** - Navigation and routing
 - **Vite** - Fast development build tool
 - **CSS Grid & Flexbox** - Modern responsive layout
 
@@ -104,7 +105,11 @@ src/
 │   ├── CriptoSearchForm.tsx    # Search and selection form
 │   ├── CryptoPriceDisplay.tsx  # Price display component
 │   ├── ErrorMessage.tsx        # Error handling
+│   ├── Footer.tsx             # Footer component
 │   └── Spinner.tsx            # Loading indicator
+├── pages/               # Application pages
+│   ├── Home.tsx               # Main cryptocurrency app
+│   └── Credits.tsx            # Credits and acknowledgments
 ├── data/               # Static data (supported currencies)
 ├── schema/             # Zod validation schemas
 ├── services/           # API services
@@ -184,6 +189,7 @@ Contributions are welcome! For major changes:
 ## 📄 License
 
 This project is licensed under the MIT License.
+
 # Credits
 
 ### logo.svg
@@ -202,9 +208,9 @@ https://cryptologos.cc/bitcoin
 ### bg.jpg
 Foto de <a href="https://unsplash.com/es/@polarmermaid?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Anne Nygård</a> en <a href="https://unsplash.com/es/fotos/interfaz-grafica-de-usuario-aplicacion-x07ELaNFt34?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
            
-## CryptoCompare
+### CryptoCompare
 ---
-### Atribución de Datos
+#### Atribución de Datos
 
 Los datos utilizados en este proyecto/aplicación se obtienen de la API gratuita de CryptoCompare.
 

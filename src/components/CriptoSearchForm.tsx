@@ -24,9 +24,6 @@ export default function CriptoSearchForm() {
     const cryptocurrencies = useCryptoStore((state) => state.cryptocurrencies)
     const fetchData = useCryptoStore((state) => state.fetchData)
 
-    console.log('CriptoSearchForm - cryptocurrencies:', cryptocurrencies)
-    console.log('CriptoSearchForm - cryptocurrencies length:', cryptocurrencies.length)
-
     const [pair, setPair] = useState<Pair>({
         currency: 'USD', // Valor predeterminado: Dólar estadounidense
         criptocurrency: ''

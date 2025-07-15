@@ -1,38 +1,15 @@
-import { useEffect } from "react"
-import CriptoSearchForm from "./components/CriptoSearchForm"
-import { useCryptoStore } from "./store"
-import CryptoPriceDisplay from "./components/CryptoPriceDisplay"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import Credits from './pages/Credits'
 
 function App() {
-  const fetchCryptos = useCryptoStore((state) => state.fetchCryptos)
-
-  useEffect(() => {
-    console.log('App - calling fetchCryptos')
-    fetchCryptos()
-  }, [])
-
   return (
-    <>
-      <div className="app-container">
-          <div className="app-header">
-              <img 
-                  src="/images/logo.svg" 
-                  alt="Bitcoin Logo" 
-                  className="app-logo"
-              />
-              <h1 className="app-title">
-                  crypto <span>BIT</span>
-              </h1>
-          </div>
-
-          <div className="main-layout">
-              <CriptoSearchForm />
-              <div className="content">
-                  <CryptoPriceDisplay />
-              </div>
-          </div>
-      </div>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/credits" element={<Credits />} />
+      </Routes>
+    </Router>
   )
 }
 
