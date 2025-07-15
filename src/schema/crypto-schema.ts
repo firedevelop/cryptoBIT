@@ -8,7 +8,8 @@ export const CurrencySchema = z.object({
 export const CryptoCurrencyResponseSchema = z.object({
     CoinInfo : z.object({
         FullName: z.string(),
-        Name: z.string()
+        Name: z.string(),
+        ImageUrl: z.string().optional()
     })
 })
 
