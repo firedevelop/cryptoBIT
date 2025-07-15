@@ -1,11 +1,18 @@
 :root {
   --white: #FFF;
-  --primary: #61ECBC;
+  --primary: #F7931A;
   --black: #182339;
+  --gray-light: #ECEBEB;
+  --gray-medium: #9CA3AF;
+  --shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  --orange-dark: #F7931A;
+  --orange-light: #f7941a4e;
 }
+
 html {
   font-size: 62.5%;
 }
+
 body {
   background-image: url('/images/bg.jpg');
   background-position: center;
@@ -14,29 +21,359 @@ body {
   min-height: 100vh;
   font-family: 'Outfit', sans-serif;
   font-size: 2rem;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
-.container {
-  max-width: 60rem;
-  width: 95%;
+
+.app-container {
+  max-width: 120rem;
+  width: 100%;
   margin: 0 auto;
+  padding: 2rem;
+  box-sizing: border-box;
 }
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+.app-logo {
+  width: 9rem;
+  height: 9rem;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
 .app-title {
   font-size: 3.8rem;
-  margin-top: 5rem;
   color: var(--white);
   line-height: .8;
+  text-align: center;
+  margin: 0;
 }
+
 .app-title span {
   display: block;
   color: var(--primary);
   font-size: 4.4rem;
 }
-.content {
-  margin-top: 5rem;
-  padding: 6rem 2rem;
+
+.main-layout {
+  display: grid;
+  grid-template-columns: 35rem 1fr;
+  gap: 3rem;
+  min-height: 70vh;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Sidebar Styles */
+.sidebar {
   background-color: var(--white);
   border-radius: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  height: fit-content;
+  max-height: 80vh;
+  overflow-y: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.currency-selector {
+  margin-bottom: 2rem;
+}
+
+.currency-selector label {
+  display: block;
+  color: var(--black);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.selected-currency-inline {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.9em;
+}
+
+.currency-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.currency-coin {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  border: 4px solid #b8860b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.98);
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.3),
+    inset 0 4px 8px rgba(255, 255, 255, 0.4),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.3),
+    inset 0 0 20px rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.currency-coin::before {
+  content: '';
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  right: 15%;
+  bottom: 15%;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.6);
+}
+
+.currency-coin::after {
+  content: '';
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  right: 25%;
+  bottom: 25%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+}
+
+.currency-coin:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    0 12px 24px rgba(0, 0, 0, 0.4),
+    inset 0 4px 8px rgba(255, 255, 255, 0.5),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 0 25px rgba(255, 255, 255, 0.3);
+  border-color: #d4af37;
+}
+
+.currency-coin.selected {
+  border-color: var(--primary);
+  transform: scale(1.15);
+  box-shadow: 
+    0 0 0 4px var(--primary),
+    0 12px 24px rgba(0, 0, 0, 0.4),
+    inset 0 4px 8px rgba(255, 255, 255, 0.5),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 0 25px rgba(255, 255, 255, 0.3);
+}
+
+/* Gradientes específicos para cada moneda usando colores del logo Bitcoin */
+.usd-gradient {
+  background: linear-gradient(135deg, #FFB600 0%, #F6921E 25%, #ED6C0C 50%, #E05A00 75%, #D85107 100%);
+  border-color: #b8860b;
+}
+
+.eur-gradient {
+  background: linear-gradient(135deg, #e8e8e8 0%, #c8c8c8 25%, #a8a8a8 50%, #888888 75%, #686868 100%);
+  border-color: #999999;
+}
+
+.gbp-gradient {
+  background: linear-gradient(135deg, #ffd700 0%, #ffcc00 25%, #e6b800 50%, #cc9900 75%, #b38600 100%);
+  border-color: #b8860b;
+}
+
+.mxn-gradient {
+  background: linear-gradient(135deg, #d4844a 0%, #c0753e 25%, #a86632 50%, #905726 75%, #78481a 100%);
+  border-color: #8b4513;
+}
+
+.currency-symbol {
+  font-size: 2.5rem;
+  font-weight: 50;
+  z-index: 3;
+  position: relative;
+  color: rgba(255, 255, 255, 0.98);
+  text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.9),
+    0 2px 4px rgba(0, 0, 0, 0.7),
+    0 0 2px rgba(0, 0, 0, 0.9),
+    1px 1px 0 rgba(0, 0, 0, 0.8),
+    -1px -1px 0 rgba(0, 0, 0, 0.8),
+    1px -1px 0 rgba(0, 0, 0, 0.8),
+    -1px 1px 0 rgba(0, 0, 0, 0.8);
+  filter: contrast(1.2) brightness(1.1);
+  font-family: Arial, sans-serif;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.selected-currency {
+  font-size: 1.4rem;
+  color: var(--black);
+  font-weight: 500;
+  margin: 0;
+  padding: 0.5rem;
+  background-color: var(--gray-light);
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.currency-selector select {
+  width: 100%;
+  background-color: var(--gray-light);
+  border: none;
+  padding: 1rem;
+  border-radius: 1rem;
+  font-size: 1.6rem;
+  color: var(--black);
+  box-sizing: border-box;
+}
+
+.crypto-list h3 {
+  color: var(--black);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+
+.crypto-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.crypto-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.crypto-item:hover {
+  background-color: var(--gray-light);
+  transform: translateY(-2px);
+}
+
+.crypto-item.selected {
+  background-color: var(--orange-light);
+  border-color: var(--orange-dark);
+}
+
+.crypto-logo {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.crypto-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.crypto-symbol {
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--black);
+}
+
+.crypto-name {
+  font-size: 2rem;
+  color: var(--gray-medium);
+  line-height: 1.2;
+}
+
+/* Content Area */
+.content {
+  background-color: var(--white);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  padding: 3rem;
+  min-height: 50rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Welcome State Styles */
+.welcome-state {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-content {
+  text-align: center;
+  max-width: 40rem;
+}
+
+.welcome-logo {
+  width: 8rem;
+  height: 8rem;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.welcome-content h2 {
+  color: var(--black);
+  font-size: 2.4rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.welcome-content p {
+  color: var(--gray-medium);
+  font-size: 1.6rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.default-selection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--orange-light) 100%);
+  border-radius: 1rem;
+  color: var(--black);
+  font-weight: 600;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 12px rgba(97, 236, 188, 0.3);
+}
+
+.default-selection span:nth-child(2) {
+  font-size: 2rem;
+  color: var(--black);
 }
 
 .form,
@@ -71,24 +408,756 @@ body {
 }
 
 .result-wrapper {
-  margin-top: 5rem;
+  width: 100%;
 }
+
 .result-wrapper h2 {
   text-align: center;
+  color: var(--black);
+  margin-bottom: 2rem;
 }
+
 .result {
   display: grid;
   grid-template-columns: 1fr 3fr;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
+  background-color: var(--gray-light);
+  padding: 2rem;
+  border-radius: 1rem;
 }
+
 .result img {
   width: 100%;
+  max-width: 20rem;
+  border-radius: 50%;
 }
+
 .result p {
   margin: 0 0 1rem;
-  font-size: 1.6rem;
+  font-size: 2.6rem;
+  color: var(--black);
 }
+
 .result span {
   font-weight: 700;
+  color: var(--primary);
+}
+
+/* Error Message Styles */
+.error {
+  background-color: #fee2e2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+/* Footer Styles */
+.footer {
+  width: 100%;
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 1.6rem;
+  color: var(--gray-medium);
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 1.2rem;
+  padding: 1.5rem 2.5rem;
+  border: 2px solid rgba(247, 147, 26, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  text-align: center;
+}
+
+.footer-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--gray-medium);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.footer-link:hover {
+  color: var(--primary);
+}
+
+.footer-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.footer-separator {
+  color: var(--gray-medium);
+  font-weight: 300;
+}
+
+.footer-text {
+  color: var(--gray-medium);
+  font-size: 1.6rem;
+}
+
+/* Credits Page Styles */
+.credits-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.credits-content {
+  background-color: var(--white);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  padding: 3rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  transition: color 0.3s ease;
+}
+
+.back-link:hover {
+  color: var(--orange-dark);
+}
+
+.credits-title {
+  color: var(--black);
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  border-bottom: 3px solid var(--primary);
+  padding-bottom: 1rem;
+}
+
+.credits-section {
+  margin-bottom: 3rem;
+}
+
+.credits-section h3 {
+  color: var(--black);
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid var(--primary);
+  padding-left: 1rem;
+}
+
+.credits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.credits-list li {
+  background-color: var(--gray-light);
+  margin-bottom: 1rem;
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+  border-left: 4px solid var(--primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.credits-list li strong {
+  color: var(--black);
+  font-size: 1.6rem;
+}
+
+.credits-list li a {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.credits-list li a:hover {
+  color: var(--orange-dark);
+  text-decoration: underline;
+}
+
+.credits-footer {
+  text-align: center;
+  margin-top: 4rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--orange-light) 100%);
+  border-radius: 1rem;
+  color: var(--black);
+}
+
+.credits-footer p {
+  margin: 0.5rem 0;
+  font-size: 1.6rem;
+}
+
+.credits-footer strong {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/* License Items Styling */
+.license-item {
+  background-color: var(--gray-light);
+  margin-bottom: 2rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  border-left: 4px solid var(--primary);
+}
+
+.license-item h4 {
+  color: var(--black);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.license-item h5 {
+  color: var(--black);
+  font-size: 1.6rem;
+  margin: 1.5rem 0 1rem;
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+
+.license-item p {
+  color: var(--gray-dark);
+  font-size: 1.4rem;
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+
+.license-details {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  background-color: rgba(247, 147, 26, 0.1);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+.license-details li {
+  color: var(--gray-dark);
+  font-size: 1.3rem;
+  margin: 0.5rem 0;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(247, 147, 26, 0.2);
+}
+
+.license-details li:last-child {
+  border-bottom: none;
+}
+
+.license-links {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.license-links li {
+  margin: 0.8rem 0;
+  font-size: 1.4rem;
+}
+
+.license-item a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.license-item a:hover {
+  color: var(--orange-dark);
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-container {
+    width: 100%;
+    padding: 1rem;
+    margin: 0;
+  }
+  
+  .app-header {
+    gap: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .app-logo {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+  
+  .app-title {
+    font-size: 2.8rem;
+  }
+  
+  .app-title span {
+    font-size: 3.2rem;
+  }
+  
+  .main-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: 100%;
+  }
+  
+  .sidebar {
+    order: 2;
+    max-height: 50vh;
+    padding: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  .currency-coin {
+    width: 5rem;
+    height: 5rem;
+    font-size: 1.8rem;
+    border-width: 3px;
+    box-shadow: 
+      0 6px 12px rgba(0, 0, 0, 0.25),
+      inset 0 3px 6px rgba(255, 255, 255, 0.4),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.3),
+      inset 0 0 15px rgba(255, 255, 255, 0.2);
+  }
+  
+  .currency-symbol {
+    font-size: 2rem;
+    text-shadow: 
+      0 1px 2px rgba(0, 0, 0, 0.9),
+      0 2px 3px rgba(0, 0, 0, 0.7),
+      1px 1px 0 rgba(0, 0, 0, 0.8),
+      -1px -1px 0 rgba(0, 0, 0, 0.8),
+      1px -1px 0 rgba(0, 0, 0, 0.8),
+      -1px 1px 0 rgba(0, 0, 0, 0.8);
+  }
+  
+  .currency-coin:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 
+      0 8px 16px rgba(0, 0, 0, 0.3),
+      inset 0 3px 6px rgba(255, 255, 255, 0.5),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.4),
+      inset 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+  
+  .currency-coin.selected {
+    transform: scale(1.08);
+    box-shadow: 
+      0 0 0 3px var(--primary),
+      0 8px 16px rgba(0, 0, 0, 0.3),
+      inset 0 3px 6px rgba(255, 255, 255, 0.5),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.4),
+      inset 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+  
+  .content {
+    order: 1;
+    padding: 2rem;
+    min-height: 30rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  .welcome-logo {
+    width: 6rem;
+    height: 6rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .welcome-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .welcome-content p {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .default-selection {
+    padding: 1rem;
+    font-size: 1.6rem;
+    gap: 0.8rem;
+  }
+  
+  .crypto-item {
+    padding: 0.8rem;
+  }
+  
+  .crypto-logo {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .crypto-symbol {
+    font-size: 1.3rem;
+  }
+  
+  .crypto-name {
+    font-size: 1.1rem;
+  }
+  
+  .result {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .result img {
+    justify-self: center;
+    max-width: 8rem;
+  }
+  
+  .result p {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    padding: 0.5rem;
+  }
+  
+  .app-header {
+    gap: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-direction: column;
+  }
+  
+  .app-logo {
+    width: 4rem;
+    height: 4rem;
+  }
+  
+  .app-title {
+    font-size: 2.4rem;
+  }
+  
+  .app-title span {
+    font-size: 2.8rem;
+  }
+  
+  .main-layout {
+    gap: 1rem;
+  }
+  
+  .sidebar {
+    padding: 1rem;
+    max-height: 40vh;
+  }
+  
+  .currency-coin {
+    width: 4.5rem;
+    height: 4.5rem;
+    font-size: 1.6rem;
+    border-width: 2px;
+    box-shadow: 
+      0 4px 8px rgba(0, 0, 0, 0.2),
+      inset 0 2px 4px rgba(255, 255, 255, 0.4),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+      inset 0 0 10px rgba(255, 255, 255, 0.2);
+  }
+  
+  .currency-symbol {
+    font-size: 1.8rem;
+    text-shadow: 
+      0 1px 1px rgba(0, 0, 0, 0.9),
+      0 1px 2px rgba(0, 0, 0, 0.7),
+      1px 1px 0 rgba(0, 0, 0, 0.8),
+      -1px -1px 0 rgba(0, 0, 0, 0.8),
+      1px -1px 0 rgba(0, 0, 0, 0.8),
+      -1px 1px 0 rgba(0, 0, 0, 0.8);
+  }
+  
+  .currency-coin:hover {
+    transform: translateY(-1px) scale(1.02);
+  }
+  
+  .currency-coin.selected {
+    transform: scale(1.05);
+    box-shadow: 
+      0 0 0 2px var(--primary),
+      0 4px 8px rgba(0, 0, 0, 0.2),
+      inset 0 2px 4px rgba(255, 255, 255, 0.4),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+      inset 0 0 10px rgba(255, 255, 255, 0.2);
+  }
+  
+  .currency-buttons {
+    gap: 0.8rem;
+  }
+  
+  .selected-currency {
+    font-size: 1.2rem;
+  }
+  
+  .content {
+    padding: 1.5rem;
+    min-height: 25rem;
+  }
+  
+  .welcome-logo {
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .welcome-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .welcome-content p {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .default-selection {
+    padding: 0.8rem;
+    font-size: 1.4rem;
+    gap: 0.6rem;
+  }
+  
+  .crypto-item {
+    padding: 0.6rem;
+    gap: 0.8rem;
+  }
+  
+  .crypto-logo {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .crypto-symbol {
+    font-size: 1.2rem;
+  }
+  
+  .crypto-name {
+    font-size: 1rem;
+  }
+  
+  .result {
+    padding: 1rem;
+  }
+  
+  .result p {
+    font-size: 1.3rem;
+  }
+  
+  .currency-selector select {
+    font-size: 1.4rem;
+    padding: 0.8rem;
+  }
+  
+  .crypto-list h3 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .app-container {
+    padding: 0.3rem;
+  }
+  
+  .app-header {
+    gap: 0.8rem;
+    flex-direction: column;
+  }
+  
+  .app-logo {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  
+  .app-title {
+    font-size: 2.2rem;
+  }
+  
+  .app-title span {
+    font-size: 2.6rem;
+  }
+  
+  .sidebar {
+    padding: 0.8rem;
+  }
+  
+  .currency-coin {
+    width: 4rem;
+    height: 4rem;
+    font-size: 1.4rem;
+    border-width: 2px;
+    box-shadow: 
+      0 3px 6px rgba(0, 0, 0, 0.2),
+      inset 0 1px 3px rgba(255, 255, 255, 0.4),
+      inset 0 -1px 3px rgba(0, 0, 0, 0.3),
+      inset 0 0 8px rgba(255, 255, 255, 0.2);
+  }
+  
+  .currency-symbol {
+    font-size: 1.6rem;
+    text-shadow: 
+      0 1px 1px rgba(0, 0, 0, 0.9),
+      0 1px 2px rgba(0, 0, 0, 0.7),
+      1px 1px 0 rgba(0, 0, 0, 0.8),
+      -1px -1px 0 rgba(0, 0, 0, 0.8),
+      1px -1px 0 rgba(0, 0, 0, 0.8),
+      -1px 1px 0 rgba(0, 0, 0, 0.8);
+  }
+  
+  .currency-coin::before {
+    top: 20%;
+    left: 20%;
+    right: 20%;
+    bottom: 20%;
+    border-width: 1px;
+  }
+  
+  .currency-coin::after {
+    top: 30%;
+    left: 30%;
+    right: 30%;
+    bottom: 30%;
+  }
+  
+  .currency-buttons {
+    gap: 0.6rem;
+  }
+  
+  .content {
+    padding: 1rem;
+  }
+  
+  .welcome-logo {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .welcome-content h2 {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .welcome-content p {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .default-selection {
+    padding: 0.6rem;
+    font-size: 1.2rem;
+    gap: 0.4rem;
+  }
+  
+  .result {
+    padding: 0.8rem;
+  }
+  
+  .result p {
+    font-size: 1.2rem;
+  }
+}
+
+/* Footer and Credits Responsive Design */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    font-size: 1.4rem;
+  }
+  
+  .footer-separator {
+    display: none;
+  }
+  
+  .credits-container {
+    padding: 1rem;
+  }
+  
+  .credits-content {
+    padding: 2rem;
+  }
+  
+  .credits-title {
+    font-size: 2.4rem;
+  }
+  
+  .credits-section h3 {
+    font-size: 1.8rem;
+  }
+  
+  .credits-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-content {
+    padding: 1rem 1.5rem;
+    font-size: 1.3rem;
+    border-radius: 1rem;
+  }
+  
+  .footer-icon {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  
+  .credits-content {
+    padding: 1.5rem;
+  }
+  
+  .credits-title {
+    font-size: 2rem;
+  }
+  
+  .credits-section h3 {
+    font-size: 1.6rem;
+  }
+  
+  .credits-list li {
+    padding: 1rem;
+  }
+  
+  .credits-footer {
+    padding: 1.5rem;
+  }
+  
+  .credits-footer p {
+    font-size: 1.4rem;
+  }
 }
