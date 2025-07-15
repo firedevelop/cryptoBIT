@@ -85,7 +85,7 @@ export default function CriptoSearchForm() {
                 <label>
                     Moneda: {pair.currency && (
                         <span className="selected-currency-inline">
-                            {currencies.find(c => c.code === pair.currency)?.name}
+                            {' '}{currencies.find(c => c.code === pair.currency)?.name}
                         </span>
                     )}
                 </label>

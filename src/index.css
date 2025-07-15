@@ -5,6 +5,8 @@
   --gray-light: #ECEBEB;
   --gray-medium: #9CA3AF;
   --shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  --orange-dark: #F7931A;
+  --orange-light: #f7941a4e;
 }
 
 html {
@@ -104,7 +106,7 @@ body {
 .selected-currency-inline {
   color: var(--primary);
   font-weight: 700;
-  font-size: 1.1em;
+  font-size: 0.9em;
 }
 
 .currency-buttons {
@@ -277,8 +279,8 @@ body {
 }
 
 .crypto-item.selected {
-  background-color: var(--primary);
-  border-color: var(--black);
+  background-color: var(--orange-light);
+  border-color: var(--orange-dark);
 }
 
 .crypto-logo {
